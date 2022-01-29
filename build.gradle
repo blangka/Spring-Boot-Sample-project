@@ -20,10 +20,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //jpa, hibernate
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-devtools' // 매번 html 변경 될때 마다 다시 부팅안해도 되도록
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6' //JPA 에서 쿼리 param 보기 편하도록 하는것
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2' //local DB 로 하기 위해서
 	annotationProcessor 'org.projectlombok:lombok'
@@ -37,4 +39,19 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks {
+	processResources { duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE }
+}
+
+
+ext.profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
+
+sourceSets {
+	main {
+		resources {
+			srcDirs "src/main/resources", "src/main/resources-${profile}"
+		}
+	}
 }
