@@ -14,7 +14,7 @@
     2. JPA + QueryDSL + H2.
 
 ### DB구조
-    ![db](https://user-images.githubusercontent.com/98309975/151704961-f7e7bfea-e21c-4351-ad15-d6ea4b860d93.png)
+![db](https://user-images.githubusercontent.com/98309975/151704961-f7e7bfea-e21c-4351-ad15-d6ea4b860d93.png)
 
 ### Path Tree
     1. entity : JPA Domain
