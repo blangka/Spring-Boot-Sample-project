@@ -9,6 +9,9 @@
     1. 회원 기능, 상품 기능 , 주문 기능이 있다.
     2. 회원을 관리하고 주문하며 상품은 재고 관리 하도록 한다.
 
+### 실행 방법
+    $ ./gradlew bootRun --args='--spring.profiles.active=local'
+
 ### Spec
 	1. Spring boot 2.5.7 + war + java 11.
     2. JPA + QueryDSL + H2.
@@ -61,9 +64,8 @@
         이후 부터는 jdbc:h2:tcp://localhost/~/sample 이렇게 접속
         
 ### Profile
-    1. 참고 : https://jjunii486.tistory.com/227
-    2. resources-{profile} 로 yml 파일 분리
-    3. add configuration 에 active profile 에 local 로 하면 해당 경로의 yml 불러 온다
+    1. resources/properties-{profile}에 properties 파일 분리
+    2. @PropertySource(value = "classpath:properties-${spring.profiles.active}/application.properties", ignoreResourceNotFound = true) 로 설정
 
 ### JPA 
     1. 가급적이면 단방향 연관 관계를 쓰는것이 좋다.  ex)주문에 회원을 가지고있고  회원은 주문을 가지고 있지 않아야 한다.
