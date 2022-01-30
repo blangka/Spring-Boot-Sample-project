@@ -17,7 +17,7 @@ public class Delivery {
     private Long id;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 
     @Embedded
@@ -25,4 +25,8 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status; //배달상태 [READY, COMP]
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }

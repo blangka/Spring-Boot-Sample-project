@@ -17,7 +17,7 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
@@ -27,4 +27,8 @@ public class OrderItem {
 
     private int orderPrice; //주문가격
     private int count; //주문수량
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
