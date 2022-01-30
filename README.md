@@ -2,11 +2,26 @@
 
 
 ### 프로젝트 목적
-    프로젝트 초기 생성시 기본이 되는 세팅을 정리 하기 위함
+    프로젝트 초기 생성시 기본이 되는 세팅을 정리 하기 위함.
+    추가로 처음 보는 사람도 이해 할수 있도록 설명을 최대한 많이 달아 놓음.
+
+### 프로젝트 간략 기능
+    1. 회원 기능, 상품 기능 , 주문 기능이 있다.
+    2. 회원을 관리하고 주문하며 상품은 재고 관리 하도록 한다.
 
 ### Spec
-	1. Spring boot 2.5.7 + war + java 11
-    2. JPA + QueryDSL + H2
+	1. Spring boot 2.5.7 + war + java 11.
+    2. JPA + QueryDSL + H2.
+
+### DB구조
+    
+
+### Path Tree
+    1. entity : JPA Domain
+    2. repo : JPA Repository
+    3. controller
+    4. service
+    5. config : 설정 관련 configuration
 
 ### 라이브러리
     1. spring-boot-starter-web 
@@ -49,6 +64,11 @@
     1. 참고 : https://jjunii486.tistory.com/227
     2. resources-{profile} 로 yml 파일 분리
     3. add configuration 에 active profile 에 local 로 하면 해당 경로의 yml 불러 온다
+
+### JPA 
+    1. 가급적이면 단방향 연관 관계를 쓰는것이 좋다.  ex)주문에 회원을 가지고있고  회원은 주문을 가지고 있지 않아야 한다.
+    2. 다대다 연결관계는 왠만하면 만들지 말도록
+    3. 연관관계 주민은 항상 외래키가 있는 곳을 연관 관계 주인으로 하여라 일대다 관계이면 다가 무조건 주인이다.
 
 ### TDD
     1. 검증을 위해 application-test.yml 만듬
