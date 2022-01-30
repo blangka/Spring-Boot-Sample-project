@@ -1,8 +1,11 @@
 package com.hkmc.sample.entity.item;
 
+import com.hkmc.sample.entity.Category;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 //연관 관계를 한테이블에 다 떄려 넣는것
@@ -21,4 +24,8 @@ public abstract class Item { //추상 클래스로 만듬 구현체를 가질꺼
     private String name;
     private int price;
     private int stockQuantity;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
+
 }
