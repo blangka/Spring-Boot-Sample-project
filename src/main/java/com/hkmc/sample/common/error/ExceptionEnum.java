@@ -13,6 +13,7 @@ public enum ExceptionEnum {
 
     DUPLICATE_MEMBER(HttpStatus.NOT_ACCEPTABLE, "S0001", "기 가입된 회원입니다."),
     NOT_ENOUGH_STOCK(HttpStatus.NOT_ACCEPTABLE, "S0002", "재고 수량이 모자랍니다."),
+    STATUS_CHANGED_ERROR(HttpStatus.NOT_ACCEPTABLE, "S0003", "상태 변경이 되지 않습니다."),
     ;
 
     private final HttpStatus status;

@@ -2,13 +2,21 @@ package com.hkmc.sample.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hkmc.sample.model.enums.DeliveryStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "delivery")
+@Getter
 public class Delivery {
 
     @Id

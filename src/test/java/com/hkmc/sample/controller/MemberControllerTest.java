@@ -22,14 +22,15 @@ class MemberControllerTest {
     @DisplayName("modelMapper 동작확인")
     public void test_modelMapper() throws Exception {
         //given
-        ReqMember reqMember= new ReqMember();
-        reqMember.setName("lim");
-        reqMember.setAddress(new Address("seoul", "suji", "6666"));
+        Member member=Member.builder()
+                .name("lim")
+                .address(new Address("seoul", "suji", "6666"))
+                .build();
 
         //when
-        Member member = modelMapper.map(reqMember,Member.class);
+        ReqMember reqMember = modelMapper.map(member,ReqMember.class);
 
         //then
-        assertEquals(member.getName(), reqMember.getName());
+        assertEquals(member.getName(),reqMember.getName());
     }
 }
