@@ -1,5 +1,6 @@
 package com.hkmc.sample.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 
 import javax.persistence.Embeddable;
@@ -13,8 +14,11 @@ public 으로 두는 것 보다는 protected 로 설정하는 것이 그나마 �
 @Getter
 public class Address {
 
+    @ApiModelProperty(notes = "도시", example = "youngIn")
     private String city;
+    @ApiModelProperty(notes = "거리명", example = "suji")
     private String street;
+    @ApiModelProperty(notes = "zipCode", example = "668-2")
     private String zipcode;
 
     protected Address() {

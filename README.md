@@ -63,6 +63,27 @@
         ~/sample.mv.db 파일 생성 확인
         이후 부터는 jdbc:h2:tcp://localhost/~/sample 이렇게 접속
         
+### Swagger 2
+    API 검즐을 위한 swagger 적용(http://localhost:8080/swagger-ui/)
+
+### Object 간의 mapping 을 위해 사용
+    ModelMapper (https://www.baeldung.com/java-modelmapper)
+
+### Custom Respose,CustomError
+    동일한 Response Body 를 가지도록 세팅
+    1. Response가 성공인 경우
+        {
+            "resultCode": "200",
+            "resultMessage": "SUCCESS",
+            "result": 1
+        }
+    2. Response가 Error인 경우
+        common/error/ 하위에 exception custom 추가
+        {
+            "resultCode": "S0001",
+            "resultMessage": "기 가입된 회원입니다."
+        }
+
 ### Profile
     1. resources/properties-{profile}에 properties 파일 분리
     2. @PropertySource(value = "classpath:properties-${spring.profiles.active}/application.properties", ignoreResourceNotFound = true) 로 설정
@@ -75,7 +96,7 @@
     5. OneToOne은 둘다 JsonIgnore설정, OneToMany는 @JsonIgnore설정
 
 ### TDD
-    1. 검증을 위해 application-test.yml 만듬
+    1. 검증을 위해 test/java/application.yml 만듬
     2. cnt + alt + t 를 눌러서 테스트 케이스 생성해서 테스트 함
 
 ### 추가 참고사항

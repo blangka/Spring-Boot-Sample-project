@@ -1,6 +1,8 @@
 package com.hkmc.sample.entity.item;
 
 import com.hkmc.sample.entity.Category;
+import com.hkmc.sample.common.error.ExceptionEnum;
+import com.hkmc.sample.common.error.ApiException;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -28,4 +30,21 @@ public abstract class Item { //추상 클래스로 만듬 구현체를 가질꺼
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
+    /**
+     * 재고 증가
+     */
+    public void addStock(int stockQuantity){
+        this.stockQuantity += stockQuantity;
+    }
+
+    /**
+     * 재고 감소
+     */
+    public void removeStock(int stockQuantity){
+        int restStrock = this.stockQuantity - stockQuantity;
+        if (restStrock < 0) {
+            throw new ApiException(ExceptionEnum.NOT_ENOUGH_STOCK);
+        }
+        this.stockQuantity = restStrock;
+    }
 }
