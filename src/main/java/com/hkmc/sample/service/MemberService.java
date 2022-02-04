@@ -27,14 +27,23 @@ public class MemberService {
         return member.getId();
     }
 
+    /**
+     * 모든 회원 검색
+     */
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
+    /**
+     * 회원 1명 검색
+     */
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
 
+    /**
+     * 회원 중복 검증
+     */
     private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByName(member.getName());
         if(!findMembers.isEmpty()) {

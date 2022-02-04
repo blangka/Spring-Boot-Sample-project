@@ -103,6 +103,6 @@ public class Order {
 
     public int getTotalPrice() {
         return orderItems.stream()
-                .mapToInt(OrderItem::getOrderPrice).sum(); //더하기
+                .mapToInt(OrderItem::getTotalPrice).sum(); //더하기
     }
 }

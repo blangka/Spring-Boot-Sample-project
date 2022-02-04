@@ -66,6 +66,10 @@
 ### Swagger 2
     API 검즐을 위한 swagger 적용(http://localhost:8080/swagger-ui/)
 
+### log 방법
+    1. AOP 를 활용하는 방법 : https://hirlawldo.tistory.com/42?category=874134
+    2. Interceptor 활용방법 : https://hirlawldo.tistory.com/44?category=874134
+
 ### Object 간의 mapping 을 위해 사용
     ModelMapper (https://www.baeldung.com/java-modelmapper)
 

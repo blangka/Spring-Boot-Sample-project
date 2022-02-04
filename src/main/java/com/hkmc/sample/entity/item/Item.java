@@ -3,13 +3,19 @@ package com.hkmc.sample.entity.item;
 import com.hkmc.sample.entity.Category;
 import com.hkmc.sample.common.error.ExceptionEnum;
 import com.hkmc.sample.common.error.ApiException;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder //상속 관계에서 builder를 위해
 //연관 관계를 한테이블에 다 떄려 넣는것
 //더 많은 옵션은 https://browndwarf.tistory.com/53?category=838021 참고
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

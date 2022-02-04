@@ -6,6 +6,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Object들 간의 mapping시 DTO와  Entity의 매핑등에 유용하게 사용
+ * */
 @Configuration
 public class ModelMapperConfig {
 

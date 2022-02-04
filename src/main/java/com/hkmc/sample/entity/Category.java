@@ -2,8 +2,7 @@ package com.hkmc.sample.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hkmc.sample.entity.item.Item;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +12,9 @@ import static javax.persistence.FetchType.LAZY;
 
 //계층형 셀프 매핑 예제를 위해서 실무에서 거의 쓰지않음
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 public class Category {
 
