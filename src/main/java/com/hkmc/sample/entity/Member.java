@@ -34,7 +34,8 @@ public class Member {
     public static Member of(ReqMember reqMember) {
         return Member.builder()
                 .name(reqMember.getName())
-                .address(reqMember.getAddress())
+                .address(new Address(reqMember.getCity(), reqMember.getStreet(), reqMember.getZipcode()))
                 .build();
     }
+
 }

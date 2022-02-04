@@ -53,4 +53,10 @@ public abstract class Item { //추상 클래스로 만듬 구현체를 가질꺼
         }
         this.stockQuantity = restStrock;
     }
+
+    public void changeItem(String name, int price, int stockQuantity) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
 }

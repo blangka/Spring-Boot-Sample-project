@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public enum OrderStatus {
 
     ORDER("주문"),
-    CANCLE("취소"),
+    CANCEL("취소"),
     ;
 
     @NonNull

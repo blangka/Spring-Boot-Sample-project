@@ -52,7 +52,7 @@ public class Order {
     private LocalDateTime orderDate; //주문시간
 
     @Enumerated(EnumType.STRING) //Enum Ordinal 과  String이 있는데 Ordinal 은 숫자기 때문에 쓰지 말아야 한다. 중간에 추가 되는경우 대응 안됨
-    private OrderStatus status; //주문상태 [ORDER, CANCLE]
+    private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
     //==연관관계 편의==//
     /*
@@ -91,12 +91,12 @@ public class Order {
     }
 
     //==비즈니스 로직==//
-    public void cancle() {
+    public void cancel() {
         if (DeliveryStatus.COMP.equals(delivery.getStatus())) {
             throw new ApiException(ExceptionEnum.STATUS_CHANGED_ERROR);
         }
 
-        this.status = OrderStatus.CANCLE;
+        this.status = OrderStatus.CANCEL;
         orderItems.forEach(item -> {item.cancel();});
     }
 

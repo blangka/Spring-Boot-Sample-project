@@ -1,5 +1,6 @@
 package com.hkmc.sample.entity.item;
 
+import com.hkmc.sample.model.dto.ReqBook;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,14 @@ public class Book extends Item{
 
     private String author;
     private String isbn;
+
+    public static Book of(ReqBook reqBook) {
+        return Book.builder()
+                .name(reqBook.getName())
+                .price(reqBook.getPrice())
+                .stockQuantity(reqBook.getStockQuantity())
+                .author(reqBook.getAuthor())
+                .isbn(reqBook.getIsbn())
+                .build();
+    }
 }

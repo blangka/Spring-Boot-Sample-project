@@ -25,6 +25,15 @@ public class ItemService {
     }
 
     /**
+     * 상품 변경
+     */
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQueantity) {
+        Item item = itemRepository.findOne(itemId);
+        item.changeItem(name, price, stockQueantity);
+    }
+
+    /**
      * 모든 상품 조회
      */
     public List<Item> findItems() {

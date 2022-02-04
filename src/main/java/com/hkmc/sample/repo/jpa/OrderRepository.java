@@ -25,7 +25,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAllString(OrderSearch orderSearch) { //동적 쿼리 해결 예제
+    public List<Order> findAllByString(OrderSearch orderSearch) { //동적 쿼리 해결 예제
 
         /*as - is
         em.createQuery("select  o from Order o join o.member m" +

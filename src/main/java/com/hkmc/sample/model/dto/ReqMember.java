@@ -6,14 +6,23 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 @ApiModel(description = "회원 정보")
 public class ReqMember {
 
-    @ApiModelProperty(notes = "이름", example = "lim")
+    @NotEmpty(message = "회원 이름은 필수 입니다")
+    @ApiModelProperty(notes = "이름")
     private String name;
 
-    @ApiModelProperty("주소")
-    private Address address;
+    @ApiModelProperty(notes = "시")
+    private String city;
+
+    @ApiModelProperty(notes = "도")
+    private String street;
+
+    @ApiModelProperty(notes = "주소")
+    private String zipcode;
 }
