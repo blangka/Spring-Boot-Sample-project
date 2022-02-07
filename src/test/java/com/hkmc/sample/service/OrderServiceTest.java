@@ -5,7 +5,7 @@ import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.entity.Order;
 import com.hkmc.sample.entity.item.Book;
 import com.hkmc.sample.model.enums.OrderStatus;
-import com.hkmc.sample.repo.jpa.OrderRepository;
+import com.hkmc.sample.repo.jpa.OrderRepositoryOld;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ class OrderServiceTest {
     @Autowired
     OrderService orderService;
     @Autowired
-    OrderRepository orderRepository;
+    OrderRepositoryOld orderRepository;
     @Autowired
     EntityManager em;
 

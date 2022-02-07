@@ -1,13 +1,12 @@
 package com.hkmc.sample.service;
 
 import com.hkmc.sample.entity.Member;
-import com.hkmc.sample.repo.jpa.MemberRepository;
+import com.hkmc.sample.repo.jpa.MemberRepositoryOld;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +22,7 @@ class MemberServiceTest {
     @Autowired
     MemberService memberService;
     @Autowired
-    MemberRepository memberRepository;
+    MemberRepositoryOld memberRepository;
     @Autowired
     EntityManager em;
 

@@ -4,6 +4,7 @@ import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.common.error.ExceptionEnum;
 import com.hkmc.sample.common.error.ApiException;
 import com.hkmc.sample.repo.jpa.MemberRepository;
+import com.hkmc.sample.repo.jpa.MemberRepositoryOld;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,7 @@ public class MemberService {
      * 회원 1명 검색
      */
     public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).orElse(null);
     }
 
     /**

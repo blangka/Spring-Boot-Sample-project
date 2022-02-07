@@ -5,10 +5,7 @@ import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.entity.Order;
 import com.hkmc.sample.entity.OrderItem;
 import com.hkmc.sample.entity.item.Item;
-import com.hkmc.sample.repo.jpa.ItemRepository;
-import com.hkmc.sample.repo.jpa.MemberRepository;
-import com.hkmc.sample.repo.jpa.OrderRepository;
-import com.hkmc.sample.repo.jpa.OrderSearch;
+import com.hkmc.sample.repo.jpa.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +18,16 @@ import java.util.List;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final OrderRepositoryOld orderRepositoryOld;
     private final MemberRepository memberRepository;
-    private final ItemRepository itemRepository;
+    private final ItemRepositoryOld itemRepository;
 
     /**
      * 주문
      */
     @Transactional
     public Long order(Long memberId, Long itemId, int count) {
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberRepository.findById(memberId).orElse(null);
         Item item = itemRepository.findOne(itemId);
 
         Delivery delivery = Delivery.builder()
@@ -48,7 +46,7 @@ public class OrderService {
      */
     @Transactional
     public void cancelOrder(Long orderId) {
-        Order order = orderRepository.findOne(orderId);
+        Order order = orderRepository.findById(orderId).orElse(null);
         order.cancel();
     }
 
@@ -56,6 +54,6 @@ public class OrderService {
      * 검색
      */
     public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByString(orderSearch);
+        return orderRepositoryOld.findAllByString(orderSearch);
     }
 }

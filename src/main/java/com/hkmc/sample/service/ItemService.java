@@ -2,6 +2,7 @@ package com.hkmc.sample.service;
 
 import com.hkmc.sample.entity.item.Item;
 import com.hkmc.sample.repo.jpa.ItemRepository;
+import com.hkmc.sample.repo.jpa.ItemRepositoryOld;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,7 @@ public class ItemService {
      */
     @Transactional
     public void updateItem(Long itemId, String name, int price, int stockQueantity) {
-        Item item = itemRepository.findOne(itemId);
+        Item item = itemRepository.findById(itemId).orElse(null);
         item.changeItem(name, price, stockQueantity);
     }
 
@@ -44,6 +45,6 @@ public class ItemService {
      * 상품 1개 조회
      */
     public Item findOne(Long itemId) {
-        return itemRepository.findOne(itemId);
+        return itemRepository.findById(itemId).orElse(null);
     }
 }
