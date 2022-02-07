@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.hkmc.sample.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.hkmc.sample.api"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -38,4 +38,6 @@ public class SwaggerConfig {
                 .description("테스트용 Spring boot swagger")
                 .build();
     }
+
+
 }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class LoggingAspect {
 
-    @Around("execution(* com.hkmc.sample.controller.*Controller.*(..))")
+    @Around("execution(* com.hkmc.sample.controller.*Controller.*(..))||execution(* com.hkmc.sample.api.*Controller.*(..))")
     public Object logging(ProceedingJoinPoint pjp) throws Throwable {
         Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 

@@ -27,7 +27,7 @@ public class ResJson<T> {
 
   public ResJson(T result) {
     super();
-    this.resultCode = "200";
+    this.resultCode = "0000";
     this.resultMessage = "SUCCESS";
     this.result = result;
   }
