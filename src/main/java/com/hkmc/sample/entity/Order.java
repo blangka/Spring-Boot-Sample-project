@@ -70,7 +70,7 @@ public class Order {
     }
 
     public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
+        this.orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
 
@@ -81,13 +81,16 @@ public class Order {
 
     //==생성 메서드==//
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
-        return Order.builder()
-                .member(member)
-                .delivery(delivery)
-                .orderItems(List.of(orderItems))
-                .status(OrderStatus.ORDER)
-                .orderDate(LocalDateTime.now())
-                .build();
+
+        Order order = new Order();
+        order.member = member;
+        order.delivery = delivery;
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.status = OrderStatus.ORDER;
+        order.orderDate = LocalDateTime.now();
+        return order;
     }
 
     //==비즈니스 로직==//

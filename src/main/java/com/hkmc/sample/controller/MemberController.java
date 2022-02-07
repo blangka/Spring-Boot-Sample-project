@@ -1,13 +1,10 @@
 package com.hkmc.sample.controller;
 
-
-import com.hkmc.sample.entity.Address;
 import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.model.dto.ReqMember;
 import com.hkmc.sample.model.dto.ResMember;
 import com.hkmc.sample.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +20,6 @@ import java.util.stream.Collectors;
 public class MemberController {
 
     private final MemberService memberService;
-    private final ModelMapper modelMapper;
 
     @GetMapping("/members/new")
     public String createForm(Model model) {
@@ -32,14 +28,13 @@ public class MemberController {
     }
 
     @PostMapping("/members/new")
-    public String create(@Valid ReqMember reqMember, BindingResult result) {
+    public String create(@Valid ReqMember ReqMember, BindingResult result) {
 
         if (result.hasErrors()) {
             return "members/createMemberForm";
         }
 
-        Member member = Member.of(reqMember);
-
+        Member member = Member.of(ReqMember);
         memberService.join(member);
         return "redirect:/";
     }
@@ -48,7 +43,7 @@ public class MemberController {
     public String list(Model model) {
         List<Member> members = memberService.findMembers();
 
-        List<ResMember> resMembers = members.stream().map(p -> modelMapper.map(p,ResMember.class)).collect(Collectors.toList());
+        List<ResMember> resMembers = members.stream().map(ResMember::of).collect(Collectors.toList());
         model.addAttribute("members", resMembers);
         return "members/memberList";
     }

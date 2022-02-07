@@ -1,15 +1,16 @@
 package com.hkmc.sample.model.dto;
 
-import com.hkmc.sample.entity.Address;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "회원 정보")
 public class ReqMember {
 

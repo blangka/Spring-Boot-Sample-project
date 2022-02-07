@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberApiController {
 
     private final MemberService memberService;
-
+/*
     @PostMapping("/members")
     @ApiOperation(value = "회원 등록")
     public ResJson<ResId> create(@RequestBody ReqMember reqMember) {
         return new ResJson<>(new ResId(memberService.join(Member.of(reqMember))));
-    }
+    }*/
 }

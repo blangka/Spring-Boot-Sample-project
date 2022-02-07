@@ -3,18 +3,20 @@ package com.hkmc.sample.controller;
 import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.entity.Order;
 import com.hkmc.sample.entity.item.Item;
+import com.hkmc.sample.model.dto.ResItem;
 import com.hkmc.sample.model.dto.ResMember;
+import com.hkmc.sample.model.dto.ResOrder;
 import com.hkmc.sample.repo.jpa.OrderSearch;
 import com.hkmc.sample.service.ItemService;
 import com.hkmc.sample.service.MemberService;
 import com.hkmc.sample.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,8 +32,11 @@ public class OrderController {
         List<Member> members = memberService.findMembers();
         List<Item> items = itemService.findItems();
 
-        model.addAttribute("members", members);
-        model.addAttribute("items", items);
+        List<ResMember> resMembers = members.stream().map(ResMember::of).collect(Collectors.toList());
+        List<ResItem> resItems = items.stream().map(ResItem::of).collect(Collectors.toList());
+
+        model.addAttribute("members", resMembers);
+        model.addAttribute("items", resItems);
 
         return "order/orderForm";
     }
@@ -48,8 +53,9 @@ public class OrderController {
     @GetMapping("/orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
         List<Order> orders = orderService.findOrders(orderSearch);
-        model.addAttribute("orders", orders);
 
+        List<ResOrder> resOrder = orders.stream().map(ResOrder::of).collect(Collectors.toList());
+        model.addAttribute("orders", orders);
         return "order/orderList";
     }
 

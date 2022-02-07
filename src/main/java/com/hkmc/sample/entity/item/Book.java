@@ -3,6 +3,7 @@ package com.hkmc.sample.entity.item;
 import com.hkmc.sample.model.dto.ReqBook;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @SuperBuilder
 @DiscriminatorValue("B")
+@Getter
 public class Book extends Item{
 
     private String author;

@@ -1,6 +1,7 @@
 package com.hkmc.sample.entity;
 
 import com.hkmc.sample.entity.item.Item;
+import com.hkmc.sample.model.dto.ResOrder;
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,11 +40,12 @@ public class OrderItem {
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         item.removeStock(count);
 
-        return  OrderItem.builder()
-                .item(item)
-                .orderPrice(orderPrice)
-                .count(count)
-                .build();
+        OrderItem orderItem = new OrderItem();
+        orderItem.item = item;
+        orderItem.orderPrice = orderPrice;
+        orderItem.count = count;
+
+        return  orderItem;
     }
 
     //==비즈니스 로직==//

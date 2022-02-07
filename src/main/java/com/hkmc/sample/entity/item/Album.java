@@ -2,6 +2,7 @@ package com.hkmc.sample.entity.item;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @SuperBuilder
 @DiscriminatorValue("A") //안넣는 경우 기본 값이 나옴
+@Getter
 public class Album extends Item{
 
     private String artist;
