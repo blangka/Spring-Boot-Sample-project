@@ -1,11 +1,10 @@
 package com.hkmc.sample.service;
 
-import com.hkmc.sample.entity.Member;
-import com.hkmc.sample.common.error.ExceptionEnum;
 import com.hkmc.sample.common.error.ApiException;
+import com.hkmc.sample.common.error.ExceptionEnum;
+import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.model.dto.ResMember;
 import com.hkmc.sample.repo.jpa.MemberRepository;
-import com.hkmc.sample.repo.jpa.MemberRepositoryOld;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

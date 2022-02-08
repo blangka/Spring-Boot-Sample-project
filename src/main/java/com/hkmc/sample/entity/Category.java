@@ -16,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Category {
+public class Category extends BaseEntity{
 
     @Id
     @GeneratedValue

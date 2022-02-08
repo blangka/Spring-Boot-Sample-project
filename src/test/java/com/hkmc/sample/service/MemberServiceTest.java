@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -63,4 +64,6 @@ class MemberServiceTest {
         //then
         assertThrows(IllegalStateException.class, () -> memberService.join(member2));
    }
+
+
 }

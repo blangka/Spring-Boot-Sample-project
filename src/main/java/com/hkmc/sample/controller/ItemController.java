@@ -1,7 +1,6 @@
 package com.hkmc.sample.controller;
 
 import com.hkmc.sample.entity.item.Book;
-import com.hkmc.sample.entity.item.Item;
 import com.hkmc.sample.model.dto.ReqBook;
 import com.hkmc.sample.model.dto.ResBook;
 import com.hkmc.sample.model.dto.ResItem;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor

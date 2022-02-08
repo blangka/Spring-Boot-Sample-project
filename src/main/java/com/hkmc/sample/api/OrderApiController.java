@@ -1,19 +1,11 @@
 package com.hkmc.sample.api;
 
-import com.hkmc.sample.entity.Address;
-import com.hkmc.sample.entity.Order;
-import com.hkmc.sample.entity.OrderItem;
 import com.hkmc.sample.model.ResJson;
 import com.hkmc.sample.model.dto.OrderDto;
 import com.hkmc.sample.model.dto.SimpleOrderDto;
-import com.hkmc.sample.model.enums.OrderStatus;
-import com.hkmc.sample.repo.jpa.OrderRepository;
-import com.hkmc.sample.repo.jpa.OrderRepositoryOld;
-import com.hkmc.sample.repo.jpa.OrderSearch;
 import com.hkmc.sample.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 /*
 * 성능 최적화

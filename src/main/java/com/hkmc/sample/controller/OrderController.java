@@ -1,8 +1,5 @@
 package com.hkmc.sample.controller;
 
-import com.hkmc.sample.entity.Member;
-import com.hkmc.sample.entity.Order;
-import com.hkmc.sample.entity.item.Item;
 import com.hkmc.sample.model.dto.ResItem;
 import com.hkmc.sample.model.dto.ResMember;
 import com.hkmc.sample.model.dto.ResOrder;
@@ -16,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor

@@ -1,6 +1,8 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.7' //라이브러리 디펜던시 관리 기준이 된다.
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	//querydsl 추가
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 	id 'war'
 }
@@ -35,6 +37,13 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8' //Object Mapping용도
 
+	//Security
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.springframework.security:spring-security-test'
+
+	//querydsl 추가
+	implementation 'com.querydsl:querydsl-jpa'
+
 	//Swagger 2
 	implementation 'com.google.guava:guava:31.0.1-jre'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
@@ -47,6 +56,23 @@ dependencies {
 		exclude group: "org.hamcrest", module: "hamcrest-core"
 	}
 }
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+sourceSets {
+	main.java.srcDir querydslDir
+}
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
+}
+//querydsl 추가 끝
 
 tasks.named('test') {
 	useJUnitPlatform()

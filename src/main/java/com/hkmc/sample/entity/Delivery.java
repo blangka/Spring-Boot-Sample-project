@@ -17,7 +17,7 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @Table(name = "delivery")
 @Getter
-public class Delivery {
+public class Delivery extends BaseEntity{
 
     @Id
     @GeneratedValue

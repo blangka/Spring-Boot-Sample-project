@@ -2,7 +2,6 @@ package com.hkmc.sample.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hkmc.sample.entity.item.Item;
-import com.hkmc.sample.model.dto.ResOrder;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @Table(name = "order_item")
 @Getter
-public class OrderItem {
+public class OrderItem extends BaseEntity{
 
     @Id
     @GeneratedValue

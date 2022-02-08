@@ -3,7 +3,6 @@ package com.hkmc.sample.service;
 import com.hkmc.sample.entity.item.Item;
 import com.hkmc.sample.model.dto.ResItem;
 import com.hkmc.sample.repo.jpa.ItemRepository;
-import com.hkmc.sample.repo.jpa.ItemRepositoryOld;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
