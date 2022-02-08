@@ -13,6 +13,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.stream.Collectors;
 
+/**
+ * AOP에서 Logging 하기위한 설정
+ */
+
 @Aspect
 @Component
 public class LoggingAspect {

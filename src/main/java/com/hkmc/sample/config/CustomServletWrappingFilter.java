@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * HTTP통신시에 request 보기 위한 설정
+ */
+
 @Component
 public class CustomServletWrappingFilter extends OncePerRequestFilter {
 

@@ -4,6 +4,10 @@ import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ *지연 로딩을 위한 설정
+ */
+
 @Configuration
 public class Hibernate5ModuleConfig {
 

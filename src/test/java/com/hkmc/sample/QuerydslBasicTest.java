@@ -2,6 +2,7 @@ package com.hkmc.sample;
 
 import com.hkmc.sample.entity.*;
 import com.hkmc.sample.entity.item.Book;
+import com.hkmc.sample.entity.item.QBook;
 import com.hkmc.sample.service.MemberService;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.hkmc.sample.entity.QMember.member;
+import static com.hkmc.sample.entity.item.QBook.book;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -39,7 +42,7 @@ public class QuerydslBasicTest {
         Book book1 = createBook("book1", 10000, 100);
         em.persist(book1);
 
-        Book book2 = createBook("book1", 20000, 100);
+        Book book2 = createBook("book2", 20000, 100);
         em.persist(book2);
 
         OrderItem orderItem1 = OrderItem.createOrderItem(book1, 10000, 1);
@@ -63,8 +66,8 @@ public class QuerydslBasicTest {
 
         //when
         Member member2 = queryFactory
-                .selectFrom(QMember.member)
-                .where(QMember.member.id.eq(member1.getId()))
+                .selectFrom(member)
+                .where(member.id.eq(member1.getId()))
                 .fetchOne();
 
         //then
@@ -72,19 +75,54 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    public void 쿼리DSL_테스트() throws Exception {
+    public void 쿼리DSL_검색_테스트() throws Exception {
         //given
         Member findMember = queryFactory
-                .select(QMember.member)
-                .from(QMember.member)
-                .where(QMember.member.name.eq("member1"))
+                .select(member)
+                .from(member)
+                .where(member.name.eq("member1"))
                 .fetchOne();
 
+        Book findBook = queryFactory
+                .select(book)
+                .from(book)
+                .where(
+                        book.name.eq("book1")
+                        ,book.price.gt(1000)
+                )
+                .fetchOne();
         //when
 
 
         //then
         assertEquals(findMember.getName(),"member1");
+        assertEquals(findBook.getName(),"book1");
+    }
+
+    @Test
+    public void 쿼리DSL_패치테스트() throws Exception {
+        // List<Member> fetch = queryFactory
+        // 	.selectFrom(member)
+        // 	.fetch();
+
+        // Member fetchOne = queryFactory
+        // 	.selectFrom(member)
+        // 	.fetchOne();
+
+        // Member fetchFirst = queryFactory
+        // 	.selectFrom(member)
+        // 	.fetchFirst();
+
+        // QueryResults<Member> results = queryFactory
+        // 	.selectFrom(member)
+        // 	.fetchResults();
+        //
+        // results.getTotal();
+        // List<Member> content = results.getResults();
+
+        long total = queryFactory
+                .selectFrom(member)
+                .fetchCount();
     }
 
     private Member createMember(String name, String city, String street, String zipcode) {

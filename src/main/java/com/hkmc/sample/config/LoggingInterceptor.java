@@ -13,6 +13,10 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * HTTP통신시에 request 보기 위한 설정
+ */
+
 @Slf4j
 @RequiredArgsConstructor
 @Component

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * 자동을 createBy createDate 넣게 해주기 위해 audit을 위해 추가
+ */
 
 @Component
 public class UserAudiorAwareConfig implements AuditorAware<String>{
