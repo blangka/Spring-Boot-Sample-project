@@ -29,11 +29,8 @@ public class OrderController {
     @GetMapping("/order")
     public String createForm(Model model) {
 
-        List<Member> members = memberService.findMembers();
-        List<Item> items = itemService.findItems();
-
-        List<ResMember> resMembers = members.stream().map(ResMember::of).collect(Collectors.toList());
-        List<ResItem> resItems = items.stream().map(ResItem::of).collect(Collectors.toList());
+        List<ResMember> resMembers = memberService.findMembersMappingResMember();
+        List<ResItem> resItems = itemService.findItemsMappingResItem();
 
         model.addAttribute("members", resMembers);
         model.addAttribute("items", resItems);
@@ -52,10 +49,8 @@ public class OrderController {
 
     @GetMapping("/orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
-        List<Order> orders = orderService.findOrders(orderSearch);
-
-        List<ResOrder> resOrder = orders.stream().map(ResOrder::of).collect(Collectors.toList());
-        model.addAttribute("orders", orders);
+        List<ResOrder> resOrder = orderService.findOrdersMappingResOrder(orderSearch);
+        model.addAttribute("orders", resOrder);
         return "order/orderList";
     }
 

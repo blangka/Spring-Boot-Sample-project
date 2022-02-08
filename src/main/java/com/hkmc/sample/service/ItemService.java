@@ -1,6 +1,7 @@
 package com.hkmc.sample.service;
 
 import com.hkmc.sample.entity.item.Item;
+import com.hkmc.sample.model.dto.ResItem;
 import com.hkmc.sample.repo.jpa.ItemRepository;
 import com.hkmc.sample.repo.jpa.ItemRepositoryOld;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,5 +48,10 @@ public class ItemService {
      */
     public Item findOne(Long itemId) {
         return itemRepository.findById(itemId).orElse(null);
+    }
+
+    public List<ResItem> findItemsMappingResItem() {
+        List<Item> items = findItems();
+        return items.stream().map(ResItem::of).collect(Collectors.toList());
     }
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,9 +40,8 @@ public class MemberController {
 
     @GetMapping("/members")
     public String list(Model model) {
-        List<Member> members = memberService.findMembers();
 
-        List<ResMember> resMembers = members.stream().map(ResMember::of).collect(Collectors.toList());
+        List<ResMember> resMembers =memberService.findMembersMappingResMember();
         model.addAttribute("members", resMembers);
         return "members/memberList";
     }

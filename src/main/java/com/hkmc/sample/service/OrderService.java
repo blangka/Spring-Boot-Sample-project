@@ -5,12 +5,18 @@ import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.entity.Order;
 import com.hkmc.sample.entity.OrderItem;
 import com.hkmc.sample.entity.item.Item;
+import com.hkmc.sample.model.dto.OrderDto;
+import com.hkmc.sample.model.dto.ResOrder;
+import com.hkmc.sample.model.dto.SimpleOrderDto;
 import com.hkmc.sample.repo.jpa.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional(readOnly = true)
@@ -55,5 +61,48 @@ public class OrderService {
      */
     public List<Order> findOrders(OrderSearch orderSearch) {
         return orderRepositoryOld.findAllByString(orderSearch);
+    }
+
+    public List<ResOrder> findOrdersMappingResOrder(OrderSearch orderSearch) {
+        List<Order> orders = findOrders(orderSearch);
+        return orders.stream().map(ResOrder::of).collect(Collectors.toList());
+    }
+
+    public List<Order> findOrders() {
+        return orderRepository.findAll();
+    }
+
+    public List<SimpleOrderDto> simpleOrdersV1() {
+        return findOrders().stream()
+                .map(SimpleOrderDto::new)
+                .collect(toList());
+    }
+
+    public List<SimpleOrderDto> simpleOrdersV2() {
+        List<Order> orders = orderRepositoryOld.findAllWithMemberDelivery();
+        return orders.stream()
+                .map(SimpleOrderDto::new)
+                .collect(toList());
+    }
+
+    public List<OrderDto> orderV1() {
+        return findOrders().stream()
+                .map(o -> new OrderDto(o))
+                .collect(toList());
+    }
+
+    public List<OrderDto> orderV2() {
+        List<Order> orders = orderRepositoryOld.findAllWithItem();
+        return orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(toList());
+    }
+
+    public List<OrderDto> orderV3(int offset, int limit) {
+        List<Order> orders = orderRepositoryOld.findAllWithMemberDelivery(offset,limit);
+
+        return orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(toList());
     }
 }

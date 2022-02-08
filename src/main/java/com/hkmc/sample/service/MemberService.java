@@ -3,6 +3,7 @@ package com.hkmc.sample.service;
 import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.common.error.ExceptionEnum;
 import com.hkmc.sample.common.error.ApiException;
+import com.hkmc.sample.model.dto.ResMember;
 import com.hkmc.sample.repo.jpa.MemberRepository;
 import com.hkmc.sample.repo.jpa.MemberRepositoryOld;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)  // 조회시에는 readOnly true 가 성능이 더 잘나온다. 쓰기나 변경이 필요한 경우 @Transactional을 추가
@@ -50,5 +52,10 @@ public class MemberService {
         if(!findMembers.isEmpty()) {
             throw new ApiException(ExceptionEnum.DUPLICATE_MEMBER);
         }
+    }
+
+    public List<ResMember> findMembersMappingResMember() {
+        List<Member> members = findMembers();
+        return members.stream().map(ResMember::of).collect(Collectors.toList());
     }
 }

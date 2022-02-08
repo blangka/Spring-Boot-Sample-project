@@ -39,9 +39,7 @@ public class ItemController {
 
     @GetMapping("/items")
     public String list(Model model) {
-        List<Item> items = itemService.findItems();
-
-        List<ResItem> resItems = items.stream().map(ResItem::of).collect(Collectors.toList());
+        List<ResItem> resItems = itemService.findItemsMappingResItem();
         model.addAttribute("items", resItems);
         return "items/itemList";
     }

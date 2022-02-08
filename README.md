@@ -22,9 +22,12 @@
 ### Path Tree
     1. entity : JPA Domain
     2. repo : JPA Repository
-    3. controller
-    4. service
-    5. config : 설정 관련 configuration
+    3. api : api 용도
+    4. controller 
+    5. service 
+    6. queryService : 쿼리 조회
+    7. config : 설정 관련 configuration
+    8. util
 
 ### 라이브러리
     1. spring-boot-starter-web 
@@ -98,6 +101,8 @@
     3. 연관관계 주민은 항상 외래키가 있는 곳을 연관 관계 주인으로 하여라 일대다 관계이면 다가 무조건 주인이다.
     4. 모든 연관관계는 지연로딩으로 설정 @XToOne은 기본이 즉시 로딩이여서 지연 로딩으로 바꿔주어야 한다
     5. OneToOne은 둘다 JsonIgnore설정, OneToMany는 @JsonIgnore설정
+    6. spring.jpa.open-in-view=false DB 커넥션을 물고 있기 떄문에 service,repository
+        에서만 물고 있도록 해야 한다. 지연 로딩이 안된다
 
 ### TDD
     1. 검증을 위해 test/java/application.yml 만듬
