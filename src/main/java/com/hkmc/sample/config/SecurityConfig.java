@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/exception/**"
                         , "/api/**", "/h2-console/**"
                         , "/auth/**"
+                        , "/*"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
