@@ -1,7 +1,7 @@
 package com.hkmc.sample.service;
 
 import com.hkmc.sample.entity.Member;
-import com.hkmc.sample.repo.jpa.MemberRepositoryOld;
+import com.hkmc.sample.repo.jpa.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ class MemberServiceTest {
     @Autowired
     MemberService memberService;
     @Autowired
-    MemberRepositoryOld memberRepository;
+    MemberRepository memberRepository;
     @Autowired
     EntityManager em;
 
@@ -41,7 +41,7 @@ class MemberServiceTest {
 
         //then
         //em.flush();
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepository.findById(savedId).orElse(null));
     }
 
     @Test

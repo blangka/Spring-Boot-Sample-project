@@ -1,17 +1,18 @@
 package com.hkmc.sample.api;
 
+import com.hkmc.sample.model.ReqList;
 import com.hkmc.sample.model.ResJson;
+import com.hkmc.sample.model.ResPage;
 import com.hkmc.sample.model.dto.OrderDto;
 import com.hkmc.sample.model.dto.SimpleOrderDto;
+import com.hkmc.sample.repo.jpa.OrderSearch;
 import com.hkmc.sample.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -80,6 +81,18 @@ public class OrderApiController {
     public ResJson<List<OrderDto>> ordersV3(@RequestParam(value = "offset", defaultValue = "0") int offset,
                                             @RequestParam(value = "limit", defaultValue = "100") int limit){
         List<OrderDto> result = orderService.orderV3(offset,limit);
+        return  new ResJson<>(result);
+    }
+
+    /*
+     * 엔티티를 조회해서 DTO로 변환(fetch join 사용O)
+     * - fetch join으로 쿼리 1번 호출
+     * */
+    @PostMapping("/v4/orders")
+    @ApiOperation(value = "ToMany관계 Collection fetch join 결과 페이징 하면 컬렉션과 관련된걸 가지고 옴 QueryDsl버전")
+    public ResJson<ResPage<OrderDto>> ordersV4(ReqList reqList,
+                                                @RequestBody OrderSearch orderSearch){
+        ResPage<OrderDto> result = orderService.orderV4(orderSearch,reqList);
         return  new ResJson<>(result);
     }
 }

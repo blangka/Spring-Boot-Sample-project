@@ -3,7 +3,14 @@ package com.hkmc.sample;
 import com.hkmc.sample.entity.*;
 import com.hkmc.sample.entity.item.Book;
 import com.hkmc.sample.entity.item.QBook;
+import com.hkmc.sample.entity.item.QItem;
+import com.hkmc.sample.model.dto.ResItem;
+import com.hkmc.sample.model.enums.OrderStatus;
 import com.hkmc.sample.service.MemberService;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +22,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
+import java.util.List;
 
 import static com.hkmc.sample.entity.QMember.member;
+import static com.hkmc.sample.entity.QOrder.order;
 import static com.hkmc.sample.entity.item.QBook.book;
+import static com.hkmc.sample.entity.item.QItem.item;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -123,6 +137,108 @@ public class QuerydslBasicTest {
         long total = queryFactory
                 .selectFrom(member)
                 .fetchCount();
+    }
+
+    @PersistenceUnit
+    EntityManagerFactory emf;
+
+    @Test
+    public void 패치JOIN_테스트() throws Exception {
+
+        em.flush();
+        em.clear();
+
+        Order order1 = queryFactory
+                .selectFrom(order)
+                .where(order.status.eq(OrderStatus.ORDER))
+                .limit(1)
+                .fetchOne();
+
+        boolean loaded1 = emf.getPersistenceUnitUtil().isLoaded(order1.getMember());
+        assertFalse(loaded1,"패치조인 미적용");
+
+        em.flush();
+        em.clear();
+
+
+        Order order2 = queryFactory
+                .selectFrom(order)
+                .join(order.member, member).fetchJoin()
+                .where(order.status.eq(OrderStatus.ORDER))
+                .limit(1)
+                .fetchOne();
+
+        boolean loaded2 = emf.getPersistenceUnitUtil().isLoaded(order2.getMember());
+        assertTrue(loaded2,"패치조인 적용");
+    }
+
+    @Test
+    public void 서브쿼리_테스트() throws Exception {
+
+        QMember memberSub = new QMember("memberSub");
+
+        List<Member> member1 = queryFactory
+                .selectFrom(member)
+                .where(member.name.in(
+                        JPAExpressions
+                                .select(memberSub.name)
+                                .from(memberSub)
+                                .where(memberSub.name.eq("member1"))
+                ))
+                .fetch();
+
+        boolean loaded1 = member1.size() > 0 ? true : false;
+
+        assertTrue(loaded1);
+    }
+
+    @Test
+    public void 튜플() throws Exception {
+
+
+        List<Tuple> fetch = queryFactory
+                .select(member.name, member.id)
+                .from(member)
+                .fetch();
+
+        for (Tuple table : fetch){
+            System.out.println("name = " + table.get(member.name));
+            System.out.println("id = " + table.get(member.id));
+        }
+
+    }
+
+    @Test
+    public void DTO() throws Exception {
+
+        List<ResItem> fetch = queryFactory
+                .select(Projections.fields(ResItem.class,
+                        item.id.as("id"),
+                        item.name,
+                        item.price
+                        ))
+                .from(item)
+                .fetch();
+
+        for (ResItem table : fetch){
+            System.out.println("name = " + table.getName());
+            System.out.println("id = " + table.getId());
+        }
+
+    }
+
+    @Test
+    public void 동적쿼리() throws Exception {
+
+        List<Member> findMember = queryFactory
+                .selectFrom(member)
+                .where(nameEq("member1"))
+                .fetch();
+
+    }
+
+    private BooleanExpression nameEq(String name) {
+        return name != null ? member.name.eq(name) : null;
     }
 
     private Member createMember(String name, String city, String street, String zipcode) {

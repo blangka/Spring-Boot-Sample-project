@@ -5,6 +5,7 @@ import com.hkmc.sample.entity.Member;
 import com.hkmc.sample.entity.Order;
 import com.hkmc.sample.entity.item.Book;
 import com.hkmc.sample.model.enums.OrderStatus;
+import com.hkmc.sample.repo.jpa.OrderRepository;
 import com.hkmc.sample.repo.jpa.OrderRepositoryOld;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,9 @@ class OrderServiceTest {
     @Autowired
     OrderService orderService;
     @Autowired
-    OrderRepositoryOld orderRepository;
+    OrderRepositoryOld orderRepositoryOld;
+    @Autowired
+    OrderRepository orderRepository;
     @Autowired
     EntityManager em;
 
@@ -52,7 +55,7 @@ class OrderServiceTest {
         //when
         Long orderId = orderService.order(member.getId(), book.getId(), orderCount);
         //then
-        Order order = orderRepository.findOne(orderId);
+        Order order = orderRepository.findById(orderId).orElse(null);
 
         assertEquals(OrderStatus.ORDER, order.getStatus(),"상품 주문시 상태는 ORDER이다");
         assertEquals(1, order.getOrderItems().size(), "주문수는 정확해야한다");
