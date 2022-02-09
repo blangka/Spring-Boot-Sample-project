@@ -45,6 +45,9 @@
         assertj: 테스트 코드를 좀 더 편하게 작성하게 도와주는 라이브러리 
         spring-test: 스프링 통합 테스트 지원
 
+### Spring Security + jwt
+    https://github.com/SimKyunam/item-bank
+
 ### Thymeleaf
     1. 참고 site : https://www.thymeleaf.org/
     2. 위치 : resources/templates/ hello.html
