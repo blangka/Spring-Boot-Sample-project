@@ -30,7 +30,7 @@ public class JwtUtil {
     public JwtUtil(String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
-
+/*
     public String createToken(User user) {
         Date now = new Date();
 
@@ -43,7 +43,7 @@ public class JwtUtil {
                 .setExpiration(new Date(now.getTime() + TOKEN_VALID_TIME)) // set Expire Time
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
-    }
+    }*/
 
     public Claims getClaims(String token) {
         return Jwts.parserBuilder()

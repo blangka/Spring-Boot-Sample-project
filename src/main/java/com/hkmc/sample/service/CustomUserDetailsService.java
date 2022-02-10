@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username)
+        User user = userRepository.findByAccount(username)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.NOT_FOUND_USER));
 
         UserDetails userDetails = createUserDetails(user);
@@ -34,12 +34,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     // DB 에 User 값이 존재한다면 UserDetails 객체로 만들어서 리턴
     private UserDetails createUserDetails(User user) {
 
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority().toString());
 
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
+                user.getAccount(),
                 user.getPassword(),
-                Collections.singleton(grantedAuthority)
+                user.getAuthorities()
         );
     }
 }

@@ -23,6 +23,4 @@ public class ResUser {
     @NumberFormat
     private String phoneNumber;
 
-    @NotEmpty
-    private Authority authority;
 }

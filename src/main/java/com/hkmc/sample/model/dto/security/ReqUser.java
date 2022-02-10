@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 public class ReqUser {
@@ -31,7 +32,4 @@ public class ReqUser {
     @ApiModelProperty(notes = "폰번호" ,example = "01062531828")
     private String phoneNumber;
 
-    @Enumerated(EnumType.STRING)
-    @ApiModelProperty(notes = "권한" ,example = "ROLE_USER")
-    private Authority authority;
 }

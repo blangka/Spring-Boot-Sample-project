@@ -51,15 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and().csrf().disable()
                 .formLogin().disable()
                 .authorizeRequests()
-                .antMatchers(
-                        "/exception/**"
-                        , "/api/**", "/h2-console/**"
-                        , "/auth/**"
-                        , "/*"
-                ).permitAll()
-                .anyRequest().authenticated()
-                .and().exceptionHandling()
-                .and().headers().frameOptions().disable() // 없으면 h2 console 안됌
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and().addFilter(filter)
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

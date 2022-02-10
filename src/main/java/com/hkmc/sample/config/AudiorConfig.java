@@ -25,11 +25,11 @@ public class AudiorConfig {
     public static class AuditorAwareImpl implements AuditorAware<String>{
         @Override
         public Optional<String> getCurrentAuditor() {
-            if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User){
+            if(SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User){
                 User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //토큰에 User 객체 반환
                 return Optional.of(user.getAccount());
             }else{
-                return Optional.empty();
+                return Optional.of("system");
             }
         }
     }
