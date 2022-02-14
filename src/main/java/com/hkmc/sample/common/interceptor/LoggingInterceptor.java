@@ -1,4 +1,4 @@
-package com.hkmc.sample.config;
+package com.hkmc.sample.common.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

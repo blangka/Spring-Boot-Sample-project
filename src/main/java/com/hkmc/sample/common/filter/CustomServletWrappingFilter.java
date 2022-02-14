@@ -1,4 +1,4 @@
-package com.hkmc.sample.config;
+package com.hkmc.sample.common.filter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;

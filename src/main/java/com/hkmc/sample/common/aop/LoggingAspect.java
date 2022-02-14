@@ -1,4 +1,4 @@
-package com.hkmc.sample.config;
+package com.hkmc.sample.common.aop;
 
 import com.google.common.base.Joiner;
 import org.aspectj.lang.ProceedingJoinPoint;

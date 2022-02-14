@@ -1,6 +1,7 @@
 package com.hkmc.sample.config;
 
 
+import com.hkmc.sample.common.interceptor.LoggingInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

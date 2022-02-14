@@ -1,4 +1,4 @@
-package com.hkmc.sample.common.security;
+package com.hkmc.sample.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hkmc.sample.entity.User;
